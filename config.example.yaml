@@ -1,0 +1,45 @@
+# photo-improve configuration
+# Copy to config.yaml and customize.
+
+# Where to look for input photos and where to write restored copies.
+# Paths are relative to the project root unless absolute.
+input_dir: input
+output_dir: output
+
+# Pipeline steps run in this order. Set enabled: false to skip a step.
+# Each step preserves the input file and produces a new file in output/.
+steps:
+
+  - name: upscale            # STUB — pass-through (planned for v0.2: Real-ESRGAN)
+    enabled: false
+    model: realesr-general-x4v3
+    scale: 2
+
+  - name: face_restore       # STUB — pass-through (planned for v0.3: GFPGAN)
+    enabled: false
+    strength: 0.7            # 0.0 = no effect, 1.0 = max GFPGAN strength
+
+  - name: colorize           # STUB — pass-through (planned for v0.4)
+    enabled: false
+    only_bw: true            # skip color photos automatically
+    saturation_threshold: 0.05  # below this avg saturation, treat as B&W
+
+  - name: gemini_restore     # WORKING — calls Gemini 2.5 Flash Image API
+    enabled: false           # opt-in: needs API key + `pip install -e ".[gemini]"`
+    model: gemini-2.5-flash-image
+    prompt: >
+      Restore this old scanned photograph: clarify, sharpen, and adjust
+      levels to match the quality of modern camera technology. Preserve the
+      original composition, framing, and any people exactly. Do not add or
+      remove elements. Return only the restored image.
+    max_retries: 2
+    timeout_seconds: 60
+
+    # ── API KEY ─────────────────────────────────────────────────────────
+    # Get a free key at https://aistudio.google.com/apikey
+    # Pick ONE of these two ways to provide it (do NOT paste the key into
+    # api_key_env — that field is for the env var NAME, not the key value):
+    #
+    #   Option 1 (RECOMMENDED) — env var, key not in config:
+    #     PowerShell:  setx GEMINI_API_KEY "your-key"
+    #     Then close

@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+*.egg
+build/
+dist/
+
+# Editor backup files (vim/nano/etc.) — IMPORTANT: prevents accidental key leaks
+*~
+*.swp
+*.swo
+*.bak
+.#*
+
+# IDE
+.vscode/
+.idea/
+
+# Pytest
+.pytest_cache/
+pytest-cache-files-*/
+
+# Project — input/output (current and any historical variants)
+input/*
+!input/.gitkeep
+input_*/
+input.*/
+output/*
+!output/.gitkeep
+output_*/
+output.*/
+
+# Logs
+logs/
+*.log
+
+# Local config — may contain credentials
+config.yaml
+config.local.yaml
+
+# Google Photos OAuth secrets
+google-credentials.json
+google-token.json
+.credentials/
+
+# AI model weights (downloaded on first run, large)
+models/
+weights/
+*.pth
+*.onnx
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Personal notes (Bruce's notes — uncomment to share)
+# README.bbw.txt

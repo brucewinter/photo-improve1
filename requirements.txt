@@ -1,0 +1,6 @@
+# Runtime deps for v0.1. Mirrors pyproject.toml [project.dependencies].
+# AI and Google Photos deps are added in their respective milestones (see README roadmap).
+Pillow>=10.0
+PyYAML>=6.0
+numpy>=1.26
+opencv-python-headless>=4.9
