@@ -65,9 +65,12 @@ def test_literal_api_key_in_config_works(monkeypatch):
 
 
 def test_api_key_env_rejects_literal_key():
+    # The validator rejects values longer than 50 chars (real keys are ~39 chars
+    # but this catches accidentally-pasted credentials of any reasonable length).
+    suspiciously_long = "x" * 60
     with pytest.raises(ValueError, match="looks like an actual API key"):
-        GeminiRestoreStep({"api_key_env": "xxxxxxxxxxxxxxxx"})
-
+        GeminiRestoreStep({"api_key_env": suspiciously_long})
+        
 
 def test_api_key_env_rejects_obviously_wrong_length():
     with pytest.raises(ValueError, match="looks like an actual API key"):
