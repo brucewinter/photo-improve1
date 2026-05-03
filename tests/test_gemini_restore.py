@@ -66,7 +66,7 @@ def test_literal_api_key_in_config_works(monkeypatch):
 
 def test_api_key_env_rejects_literal_key():
     with pytest.raises(ValueError, match="looks like an actual API key"):
-        GeminiRestoreStep({"api_key_env": "AIzaSyFakeKeyValueGoesHere1234567890XYZ"})
+        GeminiRestoreStep({"api_key_env": "xxxxxxxxxxxxxxxx"})
 
 
 def test_api_key_env_rejects_obviously_wrong_length():
